@@ -9,7 +9,7 @@ const config: Config = {
     "!**/protocols/**",
     "!**/test/**",
     "!**/domain/models/**",
-    "!**/domain/use-cases/**",
+    "!**/domain/usecases/**",
     "!**/helpers/index.ts",
   ],
   coverageDirectory: "coverage",
