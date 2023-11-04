@@ -13,6 +13,7 @@ const config: Config = {
     "!**/helpers/index.ts",
   ],
   coverageDirectory: "coverage",
+  preset: "@shelf/jest-mongodb",
   testEnvironment: "node",
   transform: {
     ".+\\.ts$": "ts-jest",
