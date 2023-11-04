@@ -7,9 +7,11 @@ jest.mock("bcrypt", () => ({
     return Promise.resolve("hashed_value");
   },
 }));
+
 interface SutTypes {
   sut: Encrypter;
 }
+
 const makeSut = (salt = 12): SutTypes => {
   const sut = new BcryptAdapter(salt);
 
@@ -31,5 +33,14 @@ describe("Bcrypt Adapter", () => {
     const { sut } = makeSut();
     const hash = await sut.encrypt("any_value");
     expect(hash).toBe("hashed_value");
+  });
+
+  test("Should throws if bcrypt throws", async () => {
+    const { sut } = makeSut();
+    jest.spyOn(bcrypt, "hash").mockImplementationOnce(() => {
+      throw new Error();
+    });
+    const promise = sut.encrypt("any_value");
+    await expect(promise).rejects.toThrow();
   });
 });
